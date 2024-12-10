@@ -1,4 +1,5 @@
 import { body } from "express-validator";
+import { ApiError } from "../exceptions/errorApi";
 
 export const bookingValidation = [
     body('date')
@@ -9,7 +10,7 @@ export const bookingValidation = [
     body('startTime')
         .notEmpty()
         .withMessage('Start time is required')
-        .matches(/^([0-1]\d|2[0-3]):([0-5]\d)$/)
+        .matches(/^([0-1]\d|2[0-3]|24):([0-5]\d)$/)
         .withMessage('Start time must be in HH:mm format'),
     body('endTime')
         .notEmpty()
@@ -23,7 +24,7 @@ export const bookingValidation = [
             const endTotalMinutes = endHours * 60 + endMinutes;
 
             if (endTotalMinutes <= startTotalMinutes) 
-                throw new Error('Start time must be earlier than end time');
+                throw ApiError.BadRequest('Start time must be earlier than end time');
             return true;
         })
 ];

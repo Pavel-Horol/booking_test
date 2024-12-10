@@ -17,14 +17,19 @@ class BookingsController {
     }
     async getAll(req: Request, res: Response, next: NextFunction) {
         try {
-
+            const userId = req.user.id
+            const bookings = await bookingsService.getAll(userId)
+            res.json(bookings) 
         }catch (error) {
             next(error)
         }
     }
     async getOne(req: Request, res: Response, next: NextFunction) {
         try {
-
+            const userId = req.user.id
+            const id = req.params.id
+            const booking = await bookingsService.getOne(+id, userId)
+            res.json(booking)
         }catch (error) {
             next(error)
         }
@@ -32,7 +37,10 @@ class BookingsController {
 
     async deleteOne(req: Request, res: Response, next: NextFunction) {
         try {
-
+            const userId = req.user.id
+            const id = req.params.id
+            const deletedBooking = await bookingsService.deleteOne(+id, userId)
+            res.json(deletedBooking)
         }catch (error) {
             next(error)
         }
