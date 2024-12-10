@@ -1,10 +1,16 @@
 import { NextFunction, Request, Response } from "express"
+import bookingsService from "../services/bookingsService"
 
 class BookingsController {
 
     async create(req: Request, res: Response, next: NextFunction) {
         try {
+            const userId = req.user.id
+            const bookingCreateData = req.body
 
+            const newBooking = await bookingsService.create(bookingCreateData, userId)
+            
+            res.status(201).json(newBooking)
         }catch (error) {
             next(error)
         }

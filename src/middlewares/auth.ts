@@ -14,7 +14,7 @@ export default async function authMiddleware(req: Request, res: Response, next: 
             return next(ApiError.UnauthorizedError())
         }
     
-        const userData = await tokenService.validate(accessToken) 
+        const userData = tokenService.validate(accessToken) 
         if(!userData) {
             return next(ApiError.UnauthorizedError())
         }
