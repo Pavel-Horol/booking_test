@@ -3,16 +3,13 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun --watch ./src/index.ts",
-    "start": "bun ./dist/index.js",
-    "build": "bun build ./src/index.ts --outdir ./dist",
-    "start:npm": "node ./dist/index.js",
-    "build:npm": "tsc",
+    "dev": "ts-node ./src/index.ts",
+    "start": "node ./dist/index.js",
+    "build": "tsc",
     "test": "jest"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
-    "@types/bun": "latest",
     "@types/dotenv": "^8.2.3",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
