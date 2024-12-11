@@ -20,7 +20,7 @@ class AuthService {
         if (!isPasswordMatch) throw ApiError.BadRequest("Password incorrect!")
             
         const accessToken = tokenService.generate({id: user.id})
-        return accessToken
+        return {accessToken}
     }
 
     async registration(username: string, password: string) {
@@ -35,7 +35,7 @@ class AuthService {
             }
         })     
         const accessToken = tokenService.generate({id: newUser.id})
-        return accessToken
+        return {accessToken}
     }
 
 }
