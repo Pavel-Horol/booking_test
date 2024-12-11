@@ -3,3 +3,8 @@ export interface BookingCreateDto {
     startTime: string;   
     endTime: string;     
 }
+export interface BookingUpdateDto {
+    date?: string;        
+    startTime?: string;   
+    endTime?: string;     
+}

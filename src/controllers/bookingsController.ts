@@ -48,7 +48,11 @@ class BookingsController {
 
     async updateOne(req: Request, res: Response, next: NextFunction) {
         try {
-
+            const userId = req.user.id
+            const id = req.params.id
+            const dataForUpdate = req.body
+            const updatedBooking = await bookingsService.update(+id, dataForUpdate, userId)
+            res.json(updatedBooking)
         }catch (error) {
             next(error)
         }

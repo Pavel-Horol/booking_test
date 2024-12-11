@@ -1,7 +1,7 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import prisma from "../database";
 import { ApiError } from "../exceptions/errorApi";
-import { BookingCreateDto } from "../types/booking.types";
+import { BookingCreateDto, BookingUpdateDto } from "../types/booking.types";
 import { formatDate, formatTime } from "../utils/dateUtil";
 
 class BookingsService {
@@ -25,14 +25,16 @@ class BookingsService {
         };
     }
 
-    async isTimeSlotAvailable(date: Date, startTime: Date, endTime: Date): Promise<boolean> {
+    async isTimeSlotAvailable(date: Date, startTime: Date, endTime: Date, excludeId?: number): Promise<boolean> {
         const overlappingBookings = await prisma.booking.findMany({
             where: {
                 date,
-                OR: [
+                AND: [
+                    { id: { not: excludeId } },
                     {
-                        startTime: { lt: endTime },
-                        endTime: { gt: startTime },
+                        OR: [
+                            { startTime: { lt: endTime }, endTime: { gt: startTime } },
+                        ],
                     },
                 ],
             },
@@ -76,6 +78,37 @@ class BookingsService {
             user: newBooking.user.username,
         };
     }
+
+    async update(id: number, bookingUpdateData: BookingUpdateDto, userId: number) {
+        const existingBooking = await prisma.booking.findUnique({ where: { id, userId } });
+
+        if (!existingBooking) { throw ApiError.BadRequest("Booking record not found"); }
+
+        const { date, startTime, endTime } = bookingUpdateData;
+
+        if (date && startTime && endTime) {
+            const normalizedData = this.normalizeDate({ date, startTime, endTime });
+            const { date: normalizedDate, startTime: normalizedStartTime, endTime: normalizedEndTime } = normalizedData;
+
+            if (!(await this.isTimeSlotAvailable(normalizedDate, normalizedStartTime, normalizedEndTime, id))) {
+                throw ApiError.BadRequest("This time slot overlaps with an existing one");
+            }
+
+            const updatedBooking = await prisma.booking.update({
+                where: { id },
+                data: {
+                    date: normalizedDate,
+                    startTime: normalizedStartTime,
+                    endTime: normalizedEndTime,
+                },
+            });
+
+            return this.createResponse(updatedBooking);
+        }
+
+        throw ApiError.BadRequest("Invalid data provided for update");
+    }
+
 
     async deleteOne(id: number, userId: number) {
         try {
