@@ -23,5 +23,6 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false,
     "esModuleInterop": true
-  }
+  },
+  "include": ["src", "tests"]
 }
