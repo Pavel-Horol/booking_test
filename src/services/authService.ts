@@ -1,6 +1,6 @@
 import prisma from "../database"
 import { ApiError } from "../exceptions/errorApi"
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import tokenService from "./tokenService"
 
 class AuthService {

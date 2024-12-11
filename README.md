@@ -4,6 +4,7 @@
 1. You need this dependencies:
 - Node.js
 - PostgreSQL
+- Bun 
 2. In root directory create .env file, here is example of this file: 
 ```bash
 PORT='3000'
@@ -22,4 +23,4 @@ DATABASE_URL='postgresql://postgres:postgres@localhost:5432/booking_db?schema=pu
 So now you can open swagger at http://localhost:3000/api-docs
 ***
 ## Implemented features 
-    - JWT  
+    - JWT 

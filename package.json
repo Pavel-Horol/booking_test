@@ -11,7 +11,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.6",
     "@types/dotenv": "^8.2.3",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
@@ -32,7 +32,7 @@
   "dependencies": {
     "@prisma/client": "^6.0.1",
     "aws-sdk": "^2.1692.0",
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-validator": "^7.2.0",
