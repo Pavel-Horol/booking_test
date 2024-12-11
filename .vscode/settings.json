@@ -1,10 +1,11 @@
 {
-    "workbench.colorCustomizations": {
-        "statusBar.background": "#1A1A1A",
-        "statusBar.noFolderBackground": "#212121",
-        "statusBar.debuggingBackground": "#263238",
-        "activityBar.background": "#7ca914",
-        "titleBar.activeBackground": "#5b0538",
-        "titleBar.activeForeground": "#F8FCEF"
-    }
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#1A1A1A",
+    "statusBar.noFolderBackground": "#212121",
+    "statusBar.debuggingBackground": "#263238",
+    "activityBar.background": "#7ca914",
+    "titleBar.activeBackground": "#5b0538",
+    "titleBar.activeForeground": "#F8FCEF"
+  },
+  "cSpell.words": ["existinguser", "newuser", "nonexistentuser", "testuser"]
 }
