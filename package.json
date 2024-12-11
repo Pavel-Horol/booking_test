@@ -3,9 +3,11 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "ts-node ./src/index.ts",
-    "start": "node ./dist/index.js",
-    "build": "tsc",
+    "dev": "bun --watch ./src/index.ts",
+    "start": "bun ./dist/index.js",
+    "build": "bun build ./src/index.ts --outdir ./dist --target node",
+    "start:npm": "node ./dist/index.js",
+    "build:npm": "tsc",
     "test": "jest"
   },
   "devDependencies": {
