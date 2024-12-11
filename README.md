@@ -23,4 +23,5 @@ DATABASE_URL='postgresql://postgres:postgres@localhost:5432/booking_db?schema=pu
 So now you can open swagger at http://localhost:3000/api-docs
 ***
 ## Implemented features 
-    - JWT 
+    - JWT
+    - Update route
